@@ -41,6 +41,7 @@ public class LL{
 
 
 
+
 	public void insert_Pos( int val, int idx ){
 
 		if( idx == 0 ){
@@ -88,6 +89,100 @@ public class LL{
 
 		size += 1;
 	}
+
+
+
+
+//  Remove Duplicate nodes from a sorted LL
+    public void rm_Duplicates(  ){
+        head = Dremove( head );
+    }
+    private Node Dremove( Node node ){
+        Node head = node;
+        
+        while( node.next != null ){
+            
+            if( node.data == node.next.data )
+                //  Delete next node
+                node.next = node.next.next;
+            else
+                node = node.next;
+        }
+        return head;
+    }
+
+
+
+	
+
+    public void Merge( LL list1, LL list2 ){
+        // mergeTwoLists( list1.head, list2.head );
+    
+    //  Merge using REcursion
+        head = R_merge( list1.head, list2.head );
+    }
+//  Merge two Sorted LL
+    public void mergeTwoLists(Node f , Node s) {
+        
+        while( f != null && s != null ){
+            if( f.data <= s.data ){
+                //  add node from list1
+                insert_End( f.data );
+                f = f.next;
+            }
+            else{
+                //  add list from list2
+                insert_End( s.data );
+                s = s.next;
+            }
+        }
+        while( f != null ){
+            insert_End( f.data );
+            f = f.next;
+        }
+        while( s != null ){
+            insert_End( s.data );
+            s = s.next;
+        }
+        
+    }
+    
+    public Node R_merge( Node f , Node s ){
+        
+        if( f == null )         return s;
+        if( s == null )         return f;
+        
+        if( f.data <= s.data ){
+            f.next = R_merge( f.next, s );
+            return f;
+        }
+        else
+            return R_merge( s, f );
+    }
+
+
+	
+
+//  Cycle detection in LL
+    public boolean hasCycle( Node node ){
+        //  Initially fast & slow both point to 1st Node
+        Node s = node;
+        Node f = s;
+        
+        while( f != null ){
+            
+            s = s.next;
+            f = f.next.next;
+            if( f == s ){
+                //  Cycle detected
+                return true;
+            }
+        }
+        return false;
+    }
+
+
+
 
 	public void display(	){
 		Node tmp = head;
