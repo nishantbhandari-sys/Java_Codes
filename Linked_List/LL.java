@@ -181,8 +181,93 @@ public class LL{
         return false;
     }
 
+	
+	
 
+//  https://leetcode.com/problems/find-the-duplicate-number/solution/
+    //  Similar soln at above link Approach: 7
+    //  Shows concept that the nodes after intersection pt is always equal to nodes before cycle head
+    
+    public ListNode detectCycle(ListNode head) {
+        ListNode fast = head;
+        ListNode slow = head;
+        boolean flag = true;
+        
+        while (fast != null && fast.next != null) {
+            fast = fast.next.next;
+            slow = slow.next;
+            
+            if (fast == slow) {
+                flag = false ;
+                break;
+            }
+        }
 
+        if (flag) {
+            return null;
+        }
+
+        // find the start node
+        fast = head;
+
+        // keep moving both forward and they will meet at cycle start
+        while (fast != slow) {
+            fast = fast.next;
+            slow = slow.next;
+        }
+        return slow;
+    }
+
+	
+	
+	
+	
+// https://leetcode.com/problems/linked-list-cycle
+    public boolean hasCycle(ListNode head) {
+        ListNode fast = head;
+        ListNode slow = head;
+
+        while (fast != null && fast.next != null) {
+            fast = fast.next.next;
+            slow = slow.next;
+            if (fast == slow) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+	
+	
+	
+	
+    // find length of the cycle
+    public int lengthCycle(ListNode head) {
+        ListNode fast = head;
+        ListNode slow = head;
+
+        while (fast != null && fast.next != null) {
+            fast = fast.next.next;
+            slow = slow.next;
+            if (fast == slow) {
+                // calculate the length
+                ListNode temp = slow;
+                int length = 0;
+                do {
+                    temp = temp.next;
+                    length++;
+                } while (temp != slow);
+                return length;
+            }
+        }
+        return 0;
+    }
+
+	
+	
+
+	
+	
 
 	public void display(	){
 		Node tmp = head;
