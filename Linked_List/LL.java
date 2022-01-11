@@ -263,11 +263,90 @@ public class LL{
         return 0;
     }
 
+
+
+//  Finding middle node of a LL
+    public void middle( ){
+        Node n = middleNode( head );
+        System.out.println( n.data );
+    }
+    public Node middleNode( Node node ) {
+        Node slow = node;
+        Node fast = node;
+        
+        while( fast != null && fast.next != null ){
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+        return slow;
+    }
 	
 	
 
+
+//  merge Sort in LL
+    public void Lsort( ){
+        head = divide( head );
+        //  70 -> 30 -> 20 -> 10 -> 50 -> 60 -> End
+    }
+    private Node divide( Node node ){
+        if( node == null || node.next == null )
+            return node;
+        // System.out.println( node.data );
+            
+        Node mid = BMid( node );
+        
+        Node f = divide( node );
+        Node s = divide( mid );
+        
+        return merge( f, s );
+    }
+    private Node merge( Node f, Node s ){
+        Node node = new Node( -1 ) ;
+        Node trv = node;
+        
+        while( f != null && s != null ){
+            
+            if( f.data < s.data ){
+                trv.next = f;
+                f = f.next;
+            }
+            else{
+                trv.next = s;
+                s = s.next;
+            }
+            trv = trv.next;
+        }
+        
+        trv.next = ( f != null ) ? f : s ;
+        return node.next;
+    }
+    private Node BMid( Node fast ){
+        Node slow = null;
+        
+        while( fast != null && fast.next != null ){
+            slow = ( slow == null ) ? fast : slow.next;
+            fast = fast.next.next;
+        }
+        //  Now slow is pointing 1 node before mid node
+        fast = slow.next;   //  mid node
+        slow.next = null;   //  Breaking link b/w lists
+        return fast;        //  return mid node
+    }
+
 	
 	
+	
+	
+    public void Hdisplay( Node tmp ){
+		while ( tmp != null ) {
+			
+			System.out.print( tmp.data + " -> " ) ;	
+			tmp = tmp.next ;
+		}
+
+		System.out.println( "End" ) ;
+    }
 
 	public void display(	){
 		Node tmp = head;
