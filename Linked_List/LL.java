@@ -1,20 +1,20 @@
 
 public class LL{
 
-	private Node head;
-	private Node tail;
+	private ListNode head;
+	private ListNode tail;
 	private int size;
 
 	public LL(	){
 
 		this.size = 0 ;
 	}
-	private class Node{
+	private class ListNode{
 
 		int data ;
-		Node next ;
+		ListNode next ;
 
-		public Node( int val ){
+		public ListNode( int val ){
 			this.data = val;
 			this.next = null;
 		}
@@ -27,10 +27,10 @@ public class LL{
         size += 1;
     }
     //  User doesn't need to handle this
-    private Node rec_pos( Node trv, int val, int idx ){
+    private ListNode rec_pos( ListNode trv, int val, int idx ){
         if( idx == 0 ){
             
-            Node node = new Node( val ) ;
+            ListNode node = new ListNode( val ) ;
             node.next = trv ;
             return node;
         }
@@ -53,12 +53,12 @@ public class LL{
 			return;
 		}
 
-		Node tmp = head;
+		ListNode tmp = head;
 		for ( int i = 1; i < idx ; i++ ) {
 			tmp = tmp.next;
 		}
 
-		Node node = new Node( val );
+		ListNode node = new ListNode( val );
 		node.next = tmp.next;
 		tmp.next = node;
 
@@ -71,7 +71,7 @@ public class LL{
 			return;
 		}
 
-		tail.next = new Node( val );
+		tail.next = new ListNode( val );
 		tail = tail.next;
 
 		size += 1;
@@ -79,7 +79,7 @@ public class LL{
 
 	public void insert_Beg( int val ){
 
-		Node node = new Node( val );
+		ListNode node = new ListNode( val );
 		node.next = head;
 		head = node ;
 
@@ -93,17 +93,17 @@ public class LL{
 
 
 
-//  Remove Duplicate nodes from a sorted LL
+//  Remove Duplicate ListNodes from a sorted LL
     public void rm_Duplicates(  ){
         head = Dremove( head );
     }
-    private Node Dremove( Node node ){
-        Node head = node;
+    private ListNode Dremove( ListNode node ){
+        ListNode head = node;
         
         while( node.next != null ){
             
             if( node.data == node.next.data )
-                //  Delete next node
+                //  Delete next ListNode
                 node.next = node.next.next;
             else
                 node = node.next;
@@ -122,11 +122,11 @@ public class LL{
         head = R_merge( list1.head, list2.head );
     }
 //  Merge two Sorted LL
-    public void mergeTwoLists(Node f , Node s) {
+    public void mergeTwoLists(ListNode f , ListNode s) {
         
         while( f != null && s != null ){
             if( f.data <= s.data ){
-                //  add node from list1
+                //  add ListNode from list1
                 insert_End( f.data );
                 f = f.next;
             }
@@ -147,7 +147,7 @@ public class LL{
         
     }
     
-    public Node R_merge( Node f , Node s ){
+    public ListNode R_merge( ListNode f , ListNode s ){
         
         if( f == null )         return s;
         if( s == null )         return f;
@@ -163,30 +163,11 @@ public class LL{
 
 	
 
-//  Cycle detection in LL
-    public boolean hasCycle( Node node ){
-        //  Initially fast & slow both point to 1st Node
-        Node s = node;
-        Node f = s;
-        
-        while( f != null ){
-            
-            s = s.next;
-            f = f.next.next;
-            if( f == s ){
-                //  Cycle detected
-                return true;
-            }
-        }
-        return false;
-    }
 
-	
-	
 
 //  https://leetcode.com/problems/find-the-duplicate-number/solution/
     //  Similar soln at above link Approach: 7
-    //  Shows concept that the nodes after intersection pt is always equal to nodes before cycle head
+    //  Shows concept that the ListNodes after intersection pt is always equal to ListNodes before cycle head
     
     public ListNode detectCycle(ListNode head) {
         ListNode fast = head;
@@ -207,7 +188,7 @@ public class LL{
             return null;
         }
 
-        // find the start node
+        // find the start ListNode
         fast = head;
 
         // keep moving both forward and they will meet at cycle start
@@ -223,7 +204,9 @@ public class LL{
 	
 	
 // https://leetcode.com/problems/linked-list-cycle
-    public boolean hasCycle(ListNode head) {
+//  Cycle detection in LL
+    public boolean hasCycle( ListNode head ){
+        //  Initially fast & slow both point to 1st ListNode
         ListNode fast = head;
         ListNode slow = head;
 
@@ -265,14 +248,14 @@ public class LL{
 
 
 
-//  Finding middle node of a LL
+//  Finding middle ListNode of a LL
     public void middle( ){
-        Node n = middleNode( head );
+        ListNode n = middleListNode( head );
         System.out.println( n.data );
     }
-    public Node middleNode( Node node ) {
-        Node slow = node;
-        Node fast = node;
+    public ListNode middleListNode( ListNode node ) {
+        ListNode slow = node;
+        ListNode fast = node;
         
         while( fast != null && fast.next != null ){
             slow = slow.next;
@@ -289,21 +272,21 @@ public class LL{
         head = divide( head );
         //  70 -> 30 -> 20 -> 10 -> 50 -> 60 -> End
     }
-    private Node divide( Node node ){
+    private ListNode divide( ListNode node ){
         if( node == null || node.next == null )
             return node;
-        // System.out.println( node.data );
+        // System.out.println( ListNode.data );
             
-        Node mid = BMid( node );
+        ListNode mid = BMid( node );
         
-        Node f = divide( node );
-        Node s = divide( mid );
+        ListNode f = divide( node );
+        ListNode s = divide( mid );
         
         return merge( f, s );
     }
-    private Node merge( Node f, Node s ){
-        Node node = new Node( -1 ) ;
-        Node trv = node;
+    private ListNode merge( ListNode f, ListNode s ){
+        ListNode node = new ListNode( -1 ) ;
+        ListNode trv = node;
         
         while( f != null && s != null ){
             
@@ -321,24 +304,24 @@ public class LL{
         trv.next = ( f != null ) ? f : s ;
         return node.next;
     }
-    private Node BMid( Node fast ){
-        Node slow = null;
+    private ListNode BMid( ListNode fast ){
+        ListNode slow = null;
         
         while( fast != null && fast.next != null ){
             slow = ( slow == null ) ? fast : slow.next;
             fast = fast.next.next;
         }
-        //  Now slow is pointing 1 node before mid node
-        fast = slow.next;   //  mid node
+        //  Now slow is pointing 1 ListNode before mid ListNode
+        fast = slow.next;   //  mid ListNode
         slow.next = null;   //  Breaking link b/w lists
-        return fast;        //  return mid node
+        return fast;        //  return mid ListNode
     }
 
 	
 	
 	
 	
-    public void Hdisplay( Node tmp ){
+    public void Hdisplay( ListNode tmp ){
 		while ( tmp != null ) {
 			
 			System.out.print( tmp.data + " -> " ) ;	
@@ -349,7 +332,7 @@ public class LL{
     }
 
 	public void display(	){
-		Node tmp = head;
+		ListNode tmp = head;
 
 		while ( tmp != null ) {
 			
