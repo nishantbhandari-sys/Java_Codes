@@ -16,18 +16,22 @@ public class Main{
         
         
         LL lst2 = new LL();
-        lst2.insert_End( 5 );
-        lst2.insert_End( 4 );
+        lst2.insert_End( 1 );
+        lst2.insert_End( 2 );
         lst2.insert_End( 3 );
-        list.insert_End( 2 );
+        lst2.insert_End( 4 );
+        lst2.insert_End( 5 );
         
-        System.out.print( "Ques: " );
-		list.display();
+//         System.out.print( "Ques: " );
+		lst2.display();
 
-        list.bubbleSort();
+//         list.bubbleSort();
         
-        System.out.print( "Ans: " );
-        list.display();
+//         System.out.print( "Ans: " );
+
+        lst2.revBween();
+
+        lst2.display();
 
 		// System.out.println( "MAin" );
 	}
