@@ -341,6 +341,7 @@ public class LL{
                     //  Swap nodes 
                     ListNode tmp = null;
                     
+                    //  Case 1:
                     if( ptr1.next == ptr2 ){
                         ptr1.next = ptr2.next;
                         ptr2.next = ptr1;
@@ -352,6 +353,7 @@ public class LL{
                         
                         if( prev1 != null )      prev1.next = ptr1;
                     }
+                    //  Case 2:
                     else{
                         tmp = ptr1.next;
                         ptr1.next = ptr2.next;
@@ -383,7 +385,96 @@ public class LL{
     
     
     
+//  Rersing a LL using REcursion without use of tail pointer
+    public void revRec( ){
+        ListNode dupHead = getLast( head );
+        tail = rev( head );
+        head = dupHead;
+    }
+    private ListNode getLast( ListNode head ){
+        if( head.next == null )
+            return head;    //  LastNode
+            
+        return getLast( head.next );
+    }
+    private ListNode rev( ListNode head ){
+        if( head.next == null ){
+            return head;
+        }
+        
+        ListNode tmp = rev( head.next );
+        head.next = null;
+        tmp.next = head;
+        
+        return tmp.next;
+    }
     
+    
+    
+
+//  Reversing a LL using 3 pointers
+    public void reverse( ){
+        ListNode prev = null;
+        ListNode curr = head;
+        ListNode ahead = head.next;
+        
+        while( curr != null ){
+            
+            curr.next = prev;
+            prev = curr;
+            curr = ahead;
+            if( ahead != null )     //  for null pointer Exception error
+                ahead = ahead.next;
+        }
+        
+        head = prev;
+    }
+    
+    
+    
+    
+//  Reversing a part of LL
+    public void revBween( ){
+        head = reverseBetween( head, 2, 4 );
+    }
+    private ListNode reverseBetween(ListNode head, int left, int right) {
+        ListNode ptr1 = null;
+        ListNode ptr2 = null;
+        ListNode prev = null;
+        ListNode curr = head;
+        ListNode ahead = head.next;
+        
+        right -= left;
+        while( left >= 1 ){
+            ptr1 = prev;
+            prev = curr;
+            curr = curr.next;
+            
+            left --;
+        }
+        ptr2 = prev;
+        ahead = ( curr == null ) ? curr : curr.next;
+        
+        while( right > 0 ){
+            curr.next = prev;
+            prev = curr;
+            curr = ahead;
+            if( ahead != null )     //  for null pointer Exception error
+                ahead = ahead.next;
+            right--;
+        }
+        
+        if( ptr1 == ptr2.next ){
+            ptr1.next = curr;
+            head = prev;
+        }
+        else{
+            ptr1.next = prev;
+        }
+        ptr2.next = curr;
+        
+        return head;
+    }
     
     
     public void Hdisplay( ListNode tmp ){
@@ -395,7 +486,6 @@ public class LL{
 
         System.out.println( "End" ) ;
     }
-
     public void display(    ){
         ListNode tmp = head;
 
