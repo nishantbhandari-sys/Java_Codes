@@ -393,6 +393,10 @@ public class LL{
     
     
     
+    
+    
+    
+    
 //  Rersing a LL using REcursion without use of tail pointer
     public void revRec( ){
         head = rev( head ); 
@@ -517,11 +521,23 @@ public class LL{
     
     
     
-    
-    
-    // public boolean isPalindrome(ListNode head) {
+//  Checks if a list is Palindrome
+    public boolean issPalindrome( ){
+        return isPalindrome( head );
+    }
+    public boolean isPalindrome(ListNode head) {
+        ListNode mid = BMid( head );
+        ListNode secondhead = rev( mid );
         
-    // }
+        while( head != null && secondhead != null ){
+            if( head.val != secondhead.val )
+                return false;;
+            head = head.next;
+            secondhead = secondhead.next;
+        }
+        
+        return true;
+    }
     
     
     
