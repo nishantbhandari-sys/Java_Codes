@@ -521,6 +521,8 @@ public class LL{
     
     
     
+
+
 //  Checks if a list is Palindrome
     public boolean issPalindrome( ){
         return isPalindrome( head );
@@ -538,6 +540,36 @@ public class LL{
         
         return true;
     }
+    
+    
+    
+    
+
+
+    public void reorder( ){
+        head = reorderList( head );
+    }
+    public ListNode reorderList(ListNode head) {
+        ListNode mid = BMid( head );
+        mid = rev( mid );
+        
+        ListNode dummy = new ListNode( -1 );
+        ListNode ans = dummy;
+        
+        while( head != null && mid != null ){
+            //  Giving head
+            dummy.next = head;
+            dummy = dummy.next;
+            head = head.next;
+            
+            //  Giving mid
+            dummy.next = mid;
+            dummy = dummy.next;
+            mid = mid.next;
+        }
+        return ans.next;
+    }
+    
     
     
     
