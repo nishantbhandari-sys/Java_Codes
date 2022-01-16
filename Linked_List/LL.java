@@ -304,6 +304,7 @@ public class LL{
         trv.next = ( f != null ) ? f : s ;
         return node.next;
     }
+    //  Breaks LL from middle
     private ListNode BMid( ListNode fast ){
         ListNode slow = null;
         
@@ -320,7 +321,14 @@ public class LL{
     
     
     
+    
+    
+    
 //  Bubble Sort in LL
+//  Written Ref
+//  https://github.com/nishant-out/Problms/blob/main/Written_ref/WhatsApp%20Image%202022-01-16%20at%2018.36.32.jpeg
+//  https://github.com/nishant-out/Problms/blob/main/Written_ref/WhatsApp%20Image%202022-01-16%20at%2018.36.31.jpeg
+    
     public void bubbleSort( ){
         head = Bubble( head );
     }
@@ -387,27 +395,24 @@ public class LL{
     
 //  Rersing a LL using REcursion without use of tail pointer
     public void revRec( ){
-        ListNode dupHead = getLast( head );
-        tail = rev( head );
-        head = dupHead;
-    }
-    private ListNode getLast( ListNode head ){
-        if( head.next == null )
-            return head;    //  LastNode
-            
-        return getLast( head.next );
+        head = rev( head ); 
     }
     private ListNode rev( ListNode head ){
         if( head.next == null ){
             return head;
         }
         
-        ListNode tmp = rev( head.next );
+        ListNode last = rev( head.next );
+        head.next.next = head;
         head.next = null;
-        tmp.next = head;
         
-        return tmp.next;
+        return last;
     }
+    
+    
+
+
+    
     
     
     
@@ -433,48 +438,95 @@ public class LL{
     
     
     
+    
+    
+    
+    
+    
 //  Reversing a part of LL
-    public void revBween( ){
-        head = reverseBetween( head, 2, 4 );
+    public void revBween( int m, int n ){
+        head = RecreverseBetween( head, m, n );
     }
-    private ListNode reverseBetween(ListNode head, int left, int right) {
+    
+    public ListNode reverseBetween(ListNode head, int left, int right) {
+        if( left == right )    return head;
+        
         ListNode ptr1 = null;
-        ListNode ptr2 = null;
+        ListNode ptr2 = head;
         ListNode prev = null;
         ListNode curr = head;
         ListNode ahead = head.next;
         
-        right -= left;
-        while( left >= 1 ){
-            ptr1 = prev;
+        //  Initialize pointers
+        int i = left;
+        while( i > 1 ){
             prev = curr;
             curr = curr.next;
+            ptr2 = curr;
+            ptr1 = prev;
             
-            left --;
+            i --;
         }
-        ptr2 = prev;
         ahead = ( curr == null ) ? curr : curr.next;
         
-        while( right > 0 ){
+        while( right >= left ){
             curr.next = prev;
             prev = curr;
             curr = ahead;
             if( ahead != null )     //  for null pointer Exception error
                 ahead = ahead.next;
+                
             right--;
         }
         
-        if( ptr1 == ptr2.next ){
-            ptr1.next = curr;
-            head = prev;
-        }
-        else{
+        if( left == 1 ){            head = prev;        }
+        
+        if( ptr1 != null ){
             ptr1.next = prev;
         }
         ptr2.next = curr;
         
         return head;
     }
+    //  using REcursion:
+    public ListNode RecreverseBetween(ListNode head, int m, int n) {
+        // if( left == right )    return head;
+        if( m <= 1 ){
+            return rev_from_start( head, n - m +1 );    //  n - m +1 => no. of nodes to reverse
+        }
+        
+        head.next = reverseBetween( head.next, m -1, n -1 );
+        
+        return head;
+    }
+    //  Reverses first n nodes of LL
+    public ListNode successor = null;
+    public ListNode rev_from_start( ListNode head, int n ){    
+        if( n == 1 ){
+            successor = head.next;
+            return head;
+        }
+        
+        ListNode last = rev_from_start( head.next, n -1 );
+        head.next.next = head;
+        head.next = successor;
+        
+        return last;
+    }
+    
+    
+    
+    
+    
+    
+    // public boolean isPalindrome(ListNode head) {
+        
+    // }
+    
+    
+    
+    
+    
     
     
     public void Hdisplay( ListNode tmp ){
