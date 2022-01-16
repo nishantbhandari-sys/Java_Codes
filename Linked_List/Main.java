@@ -29,8 +29,11 @@ public class Main{
         
 //         System.out.print( "Ans: " );
 
-        lst2.revBween();
+//         lst2.revBween();
 
+	boolean ans = lst2.issPalindrome();
+        System.out.println( ans );
+		
         lst2.display();
 
 		// System.out.println( "MAin" );
