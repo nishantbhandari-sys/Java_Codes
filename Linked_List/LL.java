@@ -577,6 +577,38 @@ public class LL{
     
     
     
+    public void revKGroup( int k ){
+        head = reverseKGroup( head, k );
+    }
+    
+    public ListNode reverseKGroup(ListNode head, int k) {
+        if( k <= 1 )    return head;
+        ListNode pass = head;
+        
+        //  Makes group of LL
+        int i = 1;
+        while( i <= k ){
+            if( pass == null ){
+                return head;
+            }
+            pass = pass.next;
+            i++;
+        }
+        ListNode tmp = reverseKGroup( pass, k);
+        ListNode newtail = head;
+        ListNode newhead = rev_from_start( head, k );
+        newtail.next = tmp;
+        
+        return newhead;
+    }
+    
+    
+    
+    
+    
+    
+    
+    
     public void Hdisplay( ListNode tmp ){
         while ( tmp != null ) {
             
