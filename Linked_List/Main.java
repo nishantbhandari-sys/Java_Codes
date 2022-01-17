@@ -21,6 +21,7 @@ public class Main{
         lst2.insert_End( 3 );
         lst2.insert_End( 4 );
         lst2.insert_End( 5 );
+        lst2.insert_End( 6 );
         
 //         System.out.print( "Ques: " );
 		lst2.display();
@@ -29,18 +30,18 @@ public class Main{
         
 //         System.out.print( "Ans: " );
 
-//         lst2.revBween();
+        // boolean ans = lst2.issPalindrome();
+        // System.out.println( ans );
 
-	boolean ans = lst2.issPalindrome();
-        System.out.println( ans );
-		
+        // lst2.reorder();
+        lst2.rotateRight( 8 );
+
         lst2.display();
 
 		// System.out.println( "MAin" );
 	}
 
 }
-
 
 
 
