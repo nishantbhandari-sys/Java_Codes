@@ -580,7 +580,6 @@ public class LL{
     public void revKGroup( int k ){
         head = reverseKGroup( head, k );
     }
-    
     public ListNode reverseKGroup(ListNode head, int k) {
         if( k <= 1 )    return head;
         ListNode pass = head;
@@ -602,6 +601,40 @@ public class LL{
         return newhead;
     }
     
+    
+    
+    
+    
+    public ListNode org = null;
+    public void rotateRight( int k ){
+        if( head == null )  return ;
+        int len = 0;
+        ListNode dummy = head;
+        
+        while( dummy != null ){
+            dummy = dummy.next;
+            len++;
+        }
+        k %= len;
+        if( k == 0 )            return ;  
+        
+        org = head;
+        int x = rotateRightt( head, k );
+        head = org;
+    }
+    public int rotateRightt(ListNode head, int k) {
+         
+        if( head.next == null ){
+            head.next = org;
+            return k -1;
+        }
+        k = rotateRightt( head.next, k );
+        if( k == 0 ){
+            org = head.next;
+            head.next = null;
+        }
+        return k -1;
+    }
     
     
     
