@@ -18,6 +18,10 @@ public class LL{
             this.val = val;
             this.next = null;
         }
+        public ListNode( int val, ListNode next ){
+            this.val = val;
+            this.next = next;
+        }
     }
 
 
@@ -605,6 +609,7 @@ public class LL{
     
     
     
+    
     public ListNode org = null;
     public void rotateRight( int k ){
         if( head == null )  return ;
@@ -635,6 +640,146 @@ public class LL{
         }
         return k -1;
     }
+    
+
+
+
+
+
+
+    public void removekthEnd( int k ){
+        head = removeNthFromEnd( head, k );
+    }
+    public ListNode removeNthFromEnd(ListNode head, int n) {
+        
+        n = hlp( head, n );
+        
+        if( n != -1 ){
+            return head.next;
+        }
+        return head;
+    }
+    public int hlp( ListNode head, int k ){
+        if( head == null ){
+            return k;
+        }
+        
+        k = hlp( head.next, k );
+        
+        if( k == -1 )   return k;
+        if( k == 0 ){
+            //  delete next node
+            head.next = head.next.next;
+            return -1;
+        }
+        return k -1;
+    }
+
+
+
+    
+    
+    //  Has bugs not good
+    public void swapkNodes( int k ){
+        head = swapNodes( head, k );
+    }
+    public ListNode swapNodes(ListNode head, int k) {
+        int len = length( head );
+        return hlper( head, k, len - ((2*k) -2) );
+    }
+    public ListNode hlper( ListNode head, int k, int n ){
+        if( k <= 1 ){
+            return rev_from_start( head, n );
+        }
+        
+        head.next = hlper( head.next, k -1, n );
+        
+        return head;
+    }
+    public int length( ListNode head ){
+        int len = 0;
+        while( head != null ){
+            head = head.next;
+            len++;
+        }
+        return len;
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    //  Adding two Lists
+    public void addTwoLists( LL list1, LL list2 ){
+        
+        head = addTwoNumbers( list1.head, list2.head );
+    }
+    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+        ListNode ans = null;
+        ListNode head = null;
+        int sum = 0;
+        int carry = 0;
+        
+        while( l1 != null && l2 != null ){
+            
+            sum = l1.val + l2.val + carry;
+            
+            carry = 0;
+            if( sum > 9 ){
+                sum = 0;
+                carry = 1;
+            }
+            
+            ans = addBeg( ans, sum );
+            if( head == null )  head = ans;
+            
+            l1 = l1.next;
+            l2 = l2.next;
+        }
+        
+        while( l1 != null ){
+            
+            sum = l1.val + carry;
+            
+            carry = 0;
+            if( sum > 9 ){
+                sum = 0;
+                carry = 1;
+            }
+            ans = addBeg( ans, sum );
+            
+            l1 = l1.next;
+        }
+        while( l2 != null ){
+            
+            sum = l2.val + carry;
+            
+            carry = 0;
+            if( sum > 9 ){
+                sum = 0;
+                carry = 1;
+            }
+            ans = addBeg( ans, sum );
+            
+            l2 = l2.next;
+        }
+        if( carry == 1 ){
+            ans = addBeg( ans, 1 );
+        }
+        
+        return head;
+    }
+    public ListNode addBeg( ListNode tail, int val ){
+        
+        if( tail == null )  return new ListNode( val );
+        tail.next = new ListNode( val, null );
+        
+        return tail.next;
+    }
+    
     
     
     
