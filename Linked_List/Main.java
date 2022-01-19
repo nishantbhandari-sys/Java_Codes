@@ -21,7 +21,7 @@ public class Main{
         lst2.insert_End( 3 );
         lst2.insert_End( 4 );
         lst2.insert_End( 5 );
-        lst2.insert_End( 6 );
+        // lst2.insert_End( 6 );
         
 //         System.out.print( "Ques: " );
 		lst2.display();
@@ -34,9 +34,16 @@ public class Main{
         // System.out.println( ans );
 
         // lst2.reorder();
-        lst2.rotateRight( 8 );
+        // lst2.rotateRight( 8 );
+
+        // lst2.removekthEnd( 5 );
+        // lst2.swapkNodes( 2 );
 
         lst2.display();
+
+        // LL sum = new LL();
+        // sum.addTwoLists( list, lst2 );
+        // sum.display();
 
 		// System.out.println( "MAin" );
 	}
