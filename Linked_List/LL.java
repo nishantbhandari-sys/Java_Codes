@@ -787,6 +787,56 @@ public class LL{
     
     
     
+    
+    public ListNode getIntersectionNode(ListNode hA, ListNode hB) {
+        int len1 = length( hA );
+        int len2 = length( hB );
+        int comm = Math.min( len1, len2 );   
+        //  If len1 == len2, then comm = 0;
+        
+        //  Make both pointers point to same no. of nodes
+        
+        if( comm == 0 ){
+            
+        }    //  Or len1 == len2
+        else if( len1 > comm ){
+            comm = len1 - comm;
+            
+            while( comm > 0 ){
+                hA = hA.next;
+                comm--;
+            }
+        }
+        else if( len2 > comm ){
+            comm = len2 - comm;
+            
+            while( comm > 0 ){
+                hB = hB.next;
+                comm--;
+            }
+        }
+        
+        while( hA != null ){    //  OR hB
+            
+            if( hA == hB )
+                return hA;  //  Or hB
+            hA = hA.next;
+            hB = hB.next;
+        }
+        return null;
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     public void Hdisplay( ListNode tmp ){
         while ( tmp != null ) {
             
