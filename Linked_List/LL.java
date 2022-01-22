@@ -834,6 +834,107 @@ public class LL{
     
     
     
+    public void atn( LL l1, LL l2 ){
+        head = addTwoNumber( l1.head, l2.head );
+    }
+    
+    public ListNode addTwoNumber(ListNode l1, ListNode l2) {
+        int len1 = length( l1 );
+        int len2 = length( l2 );
+        ListNode sum = null;
+        ListNode tail = null;
+        
+        // System.out.println( "len1: " + len1 + " len2: " + len2 );    
+        
+        if ( len1 == len2 ) {
+            sum = tail = makeNodes( len1 );
+        }
+        else if( len1 > len2 ){
+            tail = sum = makeNodes( len1 );
+            
+            while( len1 > len2 ){
+                len1--;
+                tail.val = l1.val;
+                
+                l1 = l1.next;
+                tail = tail.next;
+            }
+        }
+        else{
+            tail = sum = makeNodes( len2 );
+            
+            while( len2 > len1 ){
+                len2--;
+                tail.val = l2.val;
+                
+                l2 = l2.next;
+                tail = tail.next;
+            }
+        }
+
+        //  Add two equal Lists
+        int carry = add( l1, l2, tail );
+        
+        // Hdisplay( sum );
+        //  adjust the rest of sum
+        //  Add carry to all nodes of (left) LL till (l1 or l2)
+        
+        if( carry == 1 ){
+            carry = adjust( sum, tail, carry );
+        }
+        if( carry == 1 ){
+            sum = new ListNode( 1, sum );
+        }
+        
+        return sum;
+    }
+    public int adjust( ListNode head, ListNode tail, int carry ){
+        if( head == tail )  return carry;
+        
+        carry = adjust( head.next, tail, carry );
+        carry += head.val;
+        
+        head.val = carry %10;
+        
+        if( carry > 9 )
+            return 1;
+        return 0;
+    }
+    public int add( ListNode l1, ListNode l2, ListNode sum ){
+        if( sum == null ){
+            return 0;
+        }
+        
+        int carry = add( l1.next, l2.next, sum.next );
+        
+        carry += l1.val + l2.val;
+        
+        sum.val = carry % 10;
+        
+        if( carry > 9 )
+            return 1;
+            
+        return 0;
+    }
+    public ListNode makeNodes( int len ){
+        ListNode head, tail ;
+        head = tail = new ListNode( -1, null );
+        
+        while( len > 1 ){  //  Or len1 > 1 bec. 1 node is already created
+            len--;
+            tail.next = new ListNode( -1, null );
+            tail = tail.next;
+        }
+        return head;
+    }
+    
+    
+    
+    
+    
+    
+    
+    
     
     
     
