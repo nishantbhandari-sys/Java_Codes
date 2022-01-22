@@ -4,15 +4,15 @@ public class Main{
 
 		LL list = new LL() ;
 
-		list.insert_Beg( 10 ) ;
-		list.insert_Beg( 30 ) ;
-		list.insert_Beg( 70 ) ;
+		list.insert_Beg( 1 ) ;
+		list.insert_Beg( 3 ) ;
+		list.insert_Beg( 7 ) ;
 
-		list.insert_End( 50 ) ;
+		list.insert_End( 5 ) ;
 // 		list.display() ;
 		
-		list.insert_Rec( 20, 0 );
-		list.insert_Rec( 60, 5 );
+		list.insert_Rec( 2, 0 );
+		list.insert_Rec( 6, 5 );
         
         
         LL lst2 = new LL();
@@ -24,7 +24,8 @@ public class Main{
         // lst2.insert_End( 6 );
         
 //         System.out.print( "Ques: " );
-		lst2.display();
+
+// 		list.display();
 
 //         list.bubbleSort();
         
@@ -39,12 +40,22 @@ public class Main{
         // lst2.removekthEnd( 5 );
         // lst2.swapkNodes( 2 );
 
-        lst2.display();
+        // lst2.display();
 
-        // LL sum = new LL();
-        // sum.addTwoLists( list, lst2 );
-        // sum.display();
-
+        LL l1 = new LL();
+        LL l2 = new LL();
+        
+        l1.insert_End( 9 );
+        l1.insert_End( 9 );
+        l1.insert_End( 9 );
+        
+        l2.insert_End( 9 );
+        l2.insert_End( 9 );
+        
+        LL sum = new LL();
+        sum.atn( l1, l2 );
+        sum.display();
+        
 		// System.out.println( "MAin" );
 	}
 
